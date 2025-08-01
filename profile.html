@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Compass - Profile</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-theme">
+  <div class="background-svg">
+      <!-- Abstract SVG background pattern -->
+      <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="200" r="80" fill="var(--accent-color-light)" opacity="0.3"/>
+          <circle cx="1300" cy="600" r="120" fill="var(--accent-color-dark)" opacity="0.2"/>
+          <rect x="200" y="500" width="150" height="150" rx="20" fill="var(--primary-color)" opacity="0.1"/>
+          <path d="M0 0L1440 0L1440 400C1200 500 800 550 400 450C100 350 0 200 0 0Z" fill="var(--secondary-color)" opacity="0.05"/>
+      </svg>
+  </div>
+
+  <header class="header">
+      <nav class="navbar">
+          <div class="logo">Career Compass</div>
+          <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="explorer.html">Explore Careers</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="profile.html" class="active">Profile</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <main class="main-content profile-page">
+      <div class="profile-container">
+          <!-- Profile Header -->
+          <section class="profile-header fade-in-up">
+              <div class="profile-avatar">
+                  <div class="avatar-placeholder" id="avatarPlaceholder">
+                      <span id="avatarInitials">U</span>
+                  </div>
+                  <button class="avatar-upload-btn" onclick="uploadAvatar()">
+                      <span>📷</span>
+                  </button>
+              </div>
+              <div class="profile-info">
+                  <h1 id="profileName">User Name</h1>
+                  <p id="profileEmail">user@example.com</p>
+                  <div class="profile-stats">
+                      <span class="stat">
+                          <strong id="memberSince">0</strong> days member
+                      </span>
+                      <span class="stat">
+                          <strong id="quizCount">0</strong> quizzes taken
+                      </span>
+                      <span class="stat">
+                          <strong id="careerCount">0</strong> careers saved
+                      </span>
+                  </div>
+              </div>
+          </section>
+
+          <!-- Profile Tabs -->
+          <section class="profile-tabs fade-in-up delay-1">
+              <div class="tab-buttons">
+                  <button class="tab-btn active" data-tab="personal">Personal Info</button>
+                  <button class="tab-btn" data-tab="preferences">Preferences</button>
+                  <button class="tab-btn" data-tab="security">Security</button>
+                  <button class="tab-btn" data-tab="data">Data & Privacy</button>
+              </div>
+
+              <!-- Personal Info Tab -->
+              <div class="tab-content active" id="personal">
+                  <form id="personalForm" class="profile-form">
+                      <div class="form-row">
+                          <div class="form-group">
+                              <label for="firstName">First Name</label>
+                              <input type="text" id="firstName" name="firstName" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="lastName">Last Name</label>
+                              <input type="text" id="lastName" name="lastName" required>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="username">Username</label>
+                          <input type="text" id="username" name="username" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="email" id="email" name="email" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="bio">Bio</label>
+                          <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="interests">Interests</label>
+                          <input type="text" id="interests" name="interests" placeholder="e.g., Technology, Design, Business">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </form>
+              </div>
+
+              <!-- Preferences Tab -->
+              <div class="tab-content" id="preferences">
+                  <div class="preferences-section">
+                      <h3>Quiz Preferences</h3>
+                      <div class="preference-item">
+                          <label class="switch">
+                              <input type="checkbox" id="detailedResults">
+                              <span class="slider"></span>
+                          </label>
+                          <div class="preference-info">
+                              <h4>Detailed Results</h4>
+                              <p>Show detailed analysis of quiz results</p>
+                          </div>
+                      </div>
+                      <div class="preference-item">
+                          <label class="switch">
+                              <input type="checkbox" id="emailNotifications">
+                              <span class="slider"></span>
+                          </label>
+                          <div class="preference-info">
+                              <h4>Email Notifications</h4>
+                              <p>Receive updates about new features and recommendations</p>
+                          </div>
+                      </div>
+                      <div class="preference-item">
+                          <label class="switch">
+                              <input type="checkbox" id="progressReminders">
+                              <span class="slider"></span>
+                          </label>
+                          <div class="preference-info">
+                              <h4>Progress Reminders</h4>
+                              <p>Get reminded to take quizzes and track progress</p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="preferences-section">
+                      <h3>Career Preferences</h3>
+                      <div class="form-group">
+                          <label for="preferredCategories">Preferred Career Categories</label>
+                          <select id="preferredCategories" multiple>
+                              <option value="technology">Technology</option>
+                              <option value="healthcare">Healthcare</option>
+                              <option value="finance">Finance</option>
+                              <option value="education">Education</option>
+                              <option value="design">Design</option>
+                              <option value="marketing">Marketing</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="experienceLevel">Experience Level</label>
+                          <select id="experienceLevel">
+                              <option value="student">Student</option>
+                              <option value="entry">Entry Level</option>
+                              <option value="mid">Mid Level</option>
+                              <option value="senior">Senior Level</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Security Tab -->
+              <div class="tab-content" id="security">
+                  <div class="security-section">
+                      <h3>Change Password</h3>
+                      <form id="passwordForm" class="profile-form">
+                          <div class="form-group">
+                              <label for="currentPassword">Current Password</label>
+                              <input type="password" id="currentPassword" name="currentPassword" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="newPassword">New Password</label>
+                              <input type="password" id="newPassword" name="newPassword" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="confirmNewPassword">Confirm New Password</label>
+                              <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Change Password</button>
+                      </form>
+                  </div>
+
+                  <div class="security-section">
+                      <h3>Two-Factor Authentication</h3>
+                      <div class="preference-item">
+                          <label class="switch">
+                              <input type="checkbox" id="twoFactorAuth">
+                              <span class="slider"></span>
+                          </label>
+                          <div class="preference-info">
+                              <h4>Enable 2FA</h4>
+                              <p>Add an extra layer of security to your account</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Data & Privacy Tab -->
+              <div class="tab-content" id="data">
+                  <div class="data-section">
+                      <h3>Data Export</h3>
+                      <p>Download all your data including quiz results, saved careers, and preferences.</p>
+                      <button class="btn btn-secondary" onclick="exportUserData()">Export Data</button>
+                  </div>
+
+                  <div class="data-section">
+                      <h3>Account Deletion</h3>
+                      <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                      <button class="btn btn-danger" onclick="deleteAccount()">Delete Account</button>
+                  </div>
+
+                  <div class="data-section">
+                      <h3>Privacy Settings</h3>
+                      <div class="preference-item">
+                          <label class="switch">
+                              <input type="checkbox" id="profileVisibility">
+                              <span class="slider"></span>
+                          </label>
+                          <div class="preference-info">
+                              <h4>Public Profile</h4>
+                              <p>Allow others to see your public profile</p>
+                          </div>
+                      </div>
+                      <div class="preference-item">
+                          <label class="switch">
+                              <input type="checkbox" id="dataAnalytics">
+                              <span class="slider"></span>
+                          </label>
+                          <div class="preference-info">
+                              <h4>Data Analytics</h4>
+                              <p>Help us improve by sharing anonymous usage data</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </main>
+
+  <!-- Notification Container -->
+  <div id="notificationContainer"></div>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html> 

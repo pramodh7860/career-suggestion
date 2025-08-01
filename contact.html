@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Compass - Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="contact.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-theme">
+  <div class="background-svg">
+      <!-- Abstract SVG background pattern -->
+      <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="200" r="80" fill="var(--accent-color-light)" opacity="0.3"/>
+          <circle cx="1300" cy="600" r="120" fill="var(--accent-color-dark)" opacity="0.2"/>
+          <rect x="200" y="500" width="150" height="150" rx="20" fill="var(--primary-color)" opacity="0.1"/>
+          <path d="M0 0L1440 0L1440 400C1200 500 800 550 400 450C100 350 0 200 0 0Z" fill="var(--secondary-color)" opacity="0.05"/>
+      </svg>
+  </div>
+
+  <header class="header">
+      <nav class="navbar">
+          <div class="logo">Career Compass</div>
+          <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="explorer.html">Explore Careers</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="contact.html" class="active">Contact</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="login.html" class="btn btn-primary">Login</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <main class="main-content contact-page">
+      <div class="contact-container">
+          <!-- Contact Header -->
+          <section class="contact-header fade-in-up">
+              <h1>Get in Touch</h1>
+              <p>Have questions about your career path? We're here to help you navigate your professional journey.</p>
+          </section>
+
+          <!-- Contact Form and Info Grid -->
+          <div class="contact-grid">
+              <!-- Contact Form -->
+              <section class="contact-form-section fade-in-up delay-1">
+                  <div class="glass-card">
+                      <h2>Send us a Message</h2>
+                      <form id="contactForm" class="contact-form">
+                          <div class="form-group">
+                              <label for="name">Full Name</label>
+                              <input type="text" id="name" name="name" required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label for="email">Email Address</label>
+                              <input type="email" id="email" name="email" required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label for="subject">Subject</label>
+                              <select id="subject" name="subject" required>
+                                  <option value="">Select a subject</option>
+                                  <option value="general">General Inquiry</option>
+                                  <option value="career-advice">Career Advice</option>
+                                  <option value="technical-support">Technical Support</option>
+                                  <option value="feedback">Feedback</option>
+                                  <option value="partnership">Partnership</option>
+                              </select>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label for="message">Message</label>
+                              <textarea id="message" name="message" rows="6" required placeholder="Tell us how we can help you..."></textarea>
+                          </div>
+                          
+                          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                      </form>
+                  </div>
+              </section>
+
+              <!-- Contact Information -->
+              <section class="contact-info-section fade-in-up delay-2">
+                  <div class="glass-card">
+                      <h2>Contact Information</h2>
+                      
+                      <div class="contact-info-grid">
+                          <div class="contact-item">
+                              <div class="contact-icon">📧</div>
+                              <div class="contact-details">
+                                  <h3>Email</h3>
+                                  <p>hello@careercompass.com</p>
+                              </div>
+                          </div>
+                          
+                          <div class="contact-item">
+                              <div class="contact-icon">📱</div>
+                              <div class="contact-details">
+                                  <h3>Phone</h3>
+                                  <p>+1 (555) 123-4567</p>
+                              </div>
+                          </div>
+                          
+                          <div class="contact-item">
+                              <div class="contact-icon">📍</div>
+                              <div class="contact-details">
+                                  <h3>Address</h3>
+                                  <p>123 Career Street<br>Innovation City, IC 12345</p>
+                              </div>
+                          </div>
+                          
+                          <div class="contact-item">
+                              <div class="contact-icon">⏰</div>
+                              <div class="contact-details">
+                                  <h3>Business Hours</h3>
+                                  <p>Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </div>
+
+          <!-- FAQ Section -->
+          <section class="faq-section fade-in-up delay-3">
+              <div class="glass-card">
+                  <h2>Frequently Asked Questions</h2>
+                  <div class="faq-grid">
+                      <div class="faq-item">
+                          <h3>How does the career quiz work?</h3>
+                          <p>Our career quiz uses advanced algorithms to analyze your interests, skills, and personality traits to recommend the best career paths for you.</p>
+                      </div>
+                      
+                      <div class="faq-item">
+                          <h3>Is Career Compass free to use?</h3>
+                          <p>Yes! Our basic features are completely free. We also offer premium features for advanced career insights and personalized coaching.</p>
+                      </div>
+                      
+                      <div class="faq-item">
+                          <h3>How accurate are the career recommendations?</h3>
+                          <p>Our recommendations are based on extensive research and data analysis. However, we always recommend doing your own research and consulting with career counselors.</p>
+                      </div>
+                      
+                      <div class="faq-item">
+                          <h3>Can I save my quiz results?</h3>
+                          <p>Absolutely! Create an account to save your quiz results, track your progress, and access personalized recommendations anytime.</p>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+  <script src="contact.js"></script>
+</body>
+</html> 

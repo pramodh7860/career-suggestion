@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Compass - Register</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css"> <!-- Specific styles for login page -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-theme">
+  <div class="background-svg">
+      <!-- Abstract SVG background pattern -->
+      <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="200" r="80" fill="var(--accent-color-light)" opacity="0.3"/>
+          <circle cx="1300" cy="600" r="120" fill="var(--accent-color-dark)" opacity="0.2"/>
+          <rect x="200" y="500" width="150" height="150" rx="20" fill="var(--primary-color)" opacity="0.1"/>
+          <path d="M0 0L1440 0L1440 400C1200 500 800 550 400 450C100 350 0 200 0 0Z" fill="var(--secondary-color)" opacity="0.05"/>
+      </svg>
+  </div>
+
+  <header class="header">
+      <nav class="navbar">
+          <div class="logo">Career Compass</div>
+          <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="explorer.html">Explore Careers</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="login.html" class="btn btn-primary">Login</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <main class="main-content login-page">
+      <div class="glass-card login-card fade-in-up">
+          <h2>Create Your Account</h2>
+          <form id="registerForm">
+              <div class="form-group floating-label">
+                  <input type="text" id="username" name="username" required>
+                  <label for="username">Username</label>
+              </div>
+              <div class="form-group floating-label">
+                  <input type="text" id="firstName" name="firstName" required>
+                  <label for="firstName">First Name</label>
+              </div>
+              <div class="form-group floating-label">
+                  <input type="text" id="lastName" name="lastName" required>
+                  <label for="lastName">Last Name</label>
+              </div>
+              <div class="form-group floating-label">
+                  <input type="email" id="email" name="email" required>
+                  <label for="email">Email Address</label>
+              </div>
+              <div class="form-group floating-label password-group">
+                  <input type="password" id="password" name="password" required>
+                  <label for="password">Password</label>
+                  <button type="button" class="password-toggle">Show</button>
+              </div>
+              <div class="form-group floating-label password-group">
+                  <input type="password" id="confirmPassword" name="confirmPassword" required>
+                  <label for="confirmPassword">Confirm Password</label>
+                  <button type="button" class="password-toggle">Show</button>
+              </div>
+              <button type="submit" class="btn btn-cta ripple-effect">Create Account</button>
+          </form>
+          <p class="register-link">Already have an account? <a href="login.html">Login here</a></p>
+      </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+  <script src="register.js"></script> <!-- Specific script for register page -->
+</body>
+</html>

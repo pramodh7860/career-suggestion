@@ -1,0 +1,183 @@
+/* Specific styles for Login/Register pages */
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px); /* Adjust based on header height */
+    padding: 2rem 5%;
+  }
+  
+  .login-card {
+    max-width: 450px;
+    width: 100%;
+    padding: 3rem;
+    text-align: center;
+    background: var(--card-background-light);
+    border: 1px solid var(--card-border-light);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+  }
+  
+  .login-card h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent input background */
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--input-focus-glow);
+  }
+  
+  .form-group input.error {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+  }
+  
+  /* Floating Label Styles */
+  .form-group.floating-label label {
+    position: absolute;
+    left: 1rem;
+    top: 0.8rem;
+    color: var(--text-color);
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    font-size: 1rem;
+    background-color: transparent; /* Ensure label doesn't block input */
+    padding: 0 0.2rem;
+  }
+  
+  .form-group.floating-label input:focus + label,
+  .form-group.floating-label.has-value label {
+    top: -0.7rem;
+    left: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    background-color: var(--card-background-light); /* Match card background for "cut-out" effect */
+    border-radius: 4px;
+  }
+  
+  /* Password Toggle Button */
+  .password-group {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .password-toggle:hover {
+    background-color: rgba(106, 90, 205, 0.1);
+  }
+  
+  /* Form Validation Animations */
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    60% {
+      transform: translateX(-5px);
+    }
+    40%,
+    80% {
+      transform: translateX(5px);
+    }
+  }
+  
+  .form-group input.error {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  /* Register Link */
+  .login-links {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .forgot-password-link,
+  .register-link {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  
+  .forgot-password-link a,
+  .register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .forgot-password-link a:hover,
+  .register-link a:hover {
+    color: var(--button-hover-bg);
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments for login page */
+  @media (max-width: 480px) {
+    .login-card {
+      padding: 2rem;
+    }
+  
+    .login-card h2 {
+      font-size: 1.7rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .form-group input {
+      padding: 0.7rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  
+    .form-group.floating-label label {
+      font-size: 0.9rem;
+      top: 0.7rem;
+    }
+  
+    .form-group.floating-label input:focus + label,
+    .form-group.floating-label.has-value label {
+      font-size: 0.7rem;
+      top: -0.6rem;
+    }
+  
+    .password-toggle {
+      font-size: 0.8rem;
+    }
+  }
+  

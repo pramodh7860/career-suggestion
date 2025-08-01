@@ -1,0 +1,208 @@
+/* Specific styles for Result page */
+.result-page {
+  display: flex;
+  align-items: flex-start; /* Align to top for longer content */
+  justify-content: center;
+  min-height: calc(100vh - 80px); /* Adjust based on header height */
+  padding: 2rem 5%;
+}
+
+.result-container {
+  max-width: 900px;
+  width: 100%;
+  padding: 3rem;
+  text-align: center;
+  background: var(--card-background-light);
+  border: 1px solid var(--card-border-light);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.result-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.result-title span {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.result-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  min-height: 5rem; /* Reserve space for typing animation */
+  text-align: left;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.skills-section,
+.learning-paths-section {
+  text-align: left;
+}
+
+.skills-section h3,
+.learning-paths-section h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.skill-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.skill-tag {
+  background-color: rgba(135, 206, 235, 0.2); /* Secondary color with transparency */
+  color: var(--text-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid rgba(135, 206, 235, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: default; /* Not clickable, just visual */
+}
+
+.skill-tag:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+/* Ripple effect for skill tags (reusing global .ripple-effect if needed, or specific) */
+/* For simplicity, we'll just use the hover effect above. If a click ripple is needed,
+   the .ripple-effect class from script.js would need to be applied and handled. */
+
+.youtube-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.youtube-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.youtube-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border-color: var(--primary-color);
+}
+
+.youtube-card-thumbnail {
+  width: 100%;
+  height: 180px; /* Fixed height for thumbnails */
+  object-fit: cover;
+  display: block;
+}
+
+.youtube-card-content {
+  padding: 1rem;
+  text-align: left;
+}
+
+.youtube-card-content h4 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.youtube-card-content p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+/* Responsive adjustments for result page */
+@media (max-width: 768px) {
+  .result-container {
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .result-title {
+    font-size: 2rem;
+  }
+
+  .result-description {
+    font-size: 1rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skills-section h3,
+  .learning-paths-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .skill-tag {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .youtube-card-thumbnail {
+    height: 150px;
+  }
+
+  .youtube-card-content h4 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .result-container {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .result-title {
+    font-size: 1.8rem;
+  }
+
+  .result-description {
+    font-size: 0.95rem;
+  }
+
+  .youtube-card-thumbnail {
+    height: 120px;
+  }
+}
