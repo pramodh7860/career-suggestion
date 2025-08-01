@@ -50,7 +50,23 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Serve static files with proper MIME types
+// Health check endpoint - MUST come before static file serving
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'Career Suggestion App is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// API Routes - MUST come before static file serving
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/quiz', require('./routes/quiz'));
+app.use('/api/careers', require('./routes/careers'));
+
+// Serve static files with proper MIME types - AFTER API routes
 app.use(express.static(path.join(__dirname), {
   setHeaders: (res, path) => {
     if (path.endsWith('.css')) {
@@ -62,12 +78,6 @@ app.use(express.static(path.join(__dirname), {
     }
   }
 }));
-
-// API Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-app.use('/api/quiz', require('./routes/quiz'));
-app.use('/api/careers', require('./routes/careers'));
 
 // Serve HTML files with proper error handling
 app.get('/', (req, res) => {
@@ -177,16 +187,6 @@ app.get('/forgot-password', (req, res) => {
       console.error('Error serving forgot-password.html:', err);
       res.status(500).send('Error loading page');
     }
-  });
-});
-
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    message: 'Career Suggestion App is running',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
   });
 });
 
