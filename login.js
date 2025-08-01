@@ -64,8 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json()
 
             if (response.ok) {
+              // Extract token and user data from response
+              const { token, ...userData } = data.data
+              
               // Use auth manager to login
-              auth.login(data.token, data.user)
+              auth.login(token, userData)
+              
+              // Update navigation immediately
+              auth.forceUpdateNavigation()
               
               // Show success message
               showNotification('Login successful! Redirecting...', 'success')

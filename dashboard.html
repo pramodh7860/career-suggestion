@@ -41,8 +41,8 @@
               <p>Track your progress and discover new opportunities</p>
           </div>
           <div class="quick-actions">
-              <button class="btn btn-primary" onclick="location.href='quiz.html'">Take Quiz</button>
-              <button class="btn btn-secondary" onclick="location.href='explorer.html'">Explore Careers</button>
+              <button class="btn btn-primary" id="takeQuizBtn">Take Quiz</button>
+              <button class="btn btn-secondary" id="exploreCareersBtn">Explore Careers</button>
           </div>
       </section>
 
@@ -86,7 +86,7 @@
           <section class="dashboard-card recent-results fade-in-up delay-2">
               <div class="card-header">
                   <h2>Recent Quiz Results</h2>
-                  <button class="btn btn-text" onclick="viewAllResults()">View All</button>
+                  <button class="btn btn-text" id="viewAllResultsBtn">View All</button>
               </div>
               <div class="results-list" id="recentResults">
                   <div class="loading">Loading recent results...</div>
@@ -97,7 +97,7 @@
           <section class="dashboard-card recommendations fade-in-up delay-3">
               <div class="card-header">
                   <h2>Top Recommendations</h2>
-                  <button class="btn btn-text" onclick="refreshRecommendations()">Refresh</button>
+                  <button class="btn btn-text" id="refreshRecommendationsBtn">Refresh</button>
               </div>
               <div class="recommendations-list" id="topRecommendations">
                   <div class="loading">Loading recommendations...</div>
@@ -108,7 +108,7 @@
           <section class="dashboard-card saved-careers fade-in-up delay-4">
               <div class="card-header">
                   <h2>Saved Careers</h2>
-                  <button class="btn btn-text" onclick="location.href='explorer.html'">Explore More</button>
+                  <button class="btn btn-text" id="exploreMoreBtn">Explore More</button>
               </div>
               <div class="saved-careers-list" id="savedCareersList">
                   <div class="loading">Loading saved careers...</div>
@@ -134,7 +134,7 @@
           <section class="dashboard-card learning-path fade-in-up delay-6">
               <div class="card-header">
                   <h2>Your Learning Path</h2>
-                  <button class="btn btn-text" onclick="updateLearningPath()">Update</button>
+                  <button class="btn btn-text" id="updateLearningPathBtn">Update</button>
               </div>
               <div class="learning-steps" id="learningSteps">
                   <div class="step completed">
@@ -174,19 +174,19 @@
                   <h2>Quick Actions</h2>
               </div>
               <div class="quick-actions-grid">
-                  <button class="action-btn" onclick="location.href='quiz.html'">
+                  <button class="action-btn" id="takeNewQuizBtn">
                       <div class="action-icon">🎯</div>
                       <span>Take New Quiz</span>
                   </button>
-                  <button class="action-btn" onclick="location.href='explorer.html'">
+                  <button class="action-btn" id="exploreCareersActionBtn">
                       <div class="action-icon">🔍</div>
                       <span>Explore Careers</span>
                   </button>
-                  <button class="action-btn" onclick="exportData()">
+                  <button class="action-btn" id="exportDataBtn">
                       <div class="action-icon">📤</div>
                       <span>Export Data</span>
                   </button>
-                  <button class="action-btn" onclick="shareProgress()">
+                  <button class="action-btn" id="shareProgressBtn">
                       <div class="action-icon">📢</div>
                       <span>Share Progress</span>
                   </button>

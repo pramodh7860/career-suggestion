@@ -100,7 +100,23 @@ class AuthManager {
 
     if (this.isLoggedIn()) {
       // User is logged in
-      if (loginBtn) loginBtn.style.display = 'none'
+      if (loginBtn) {
+        // Replace login button with logout button
+        loginBtn.href = '#'
+        loginBtn.textContent = 'Logout'
+        loginBtn.classList.remove('btn-primary')
+        loginBtn.classList.add('logout-btn')
+        
+        // Remove any existing event listeners by cloning
+        const newLoginBtn = loginBtn.cloneNode(true)
+        loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn)
+        
+        // Add logout event listener to the new button
+        newLoginBtn.addEventListener('click', (e) => {
+          e.preventDefault()
+          this.logout()
+        })
+      }
       if (registerBtn) registerBtn.style.display = 'none'
       
       // Add profile link if it doesn't exist
@@ -112,28 +128,17 @@ class AuthManager {
           navLinks.appendChild(profileLi)
         }
       }
-      
-      // Add logout button if it doesn't exist
-      if (!logoutBtn) {
-        const navLinks = document.querySelector('.nav-links')
-        if (navLinks) {
-          const logoutLi = document.createElement('li')
-          logoutLi.innerHTML = '<a href="#" class="logout-btn">Logout</a>'
-          navLinks.appendChild(logoutLi)
-          
-          // Add logout event listener
-          logoutLi.querySelector('.logout-btn').addEventListener('click', (e) => {
-            e.preventDefault()
-            this.logout()
-          })
-        }
-      }
     } else {
       // User is not logged in
-      if (loginBtn) loginBtn.style.display = 'inline'
+      if (loginBtn) {
+        // Restore login button
+        loginBtn.href = 'login.html'
+        loginBtn.textContent = 'Login'
+        loginBtn.classList.remove('logout-btn')
+        loginBtn.classList.add('btn-primary')
+      }
       if (registerBtn) registerBtn.style.display = 'inline'
       if (profileBtn) profileBtn.parentElement.remove()
-      if (logoutBtn) logoutBtn.parentElement.remove()
       
       // Redirect from protected pages
       const protectedPages = ['dashboard.html', 'profile.html', 'quiz.html', 'result.html']
@@ -165,6 +170,11 @@ class AuthManager {
         this.logout()
       }
     })
+  }
+
+  // Force update navigation (useful after login/logout)
+  forceUpdateNavigation() {
+    this.updateNavigation()
   }
 }
 
