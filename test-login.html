@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        input { padding: 8px; margin: 5px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Login Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Current Auth State</h2>
+        <div id="authState" class="status info">Loading...</div>
+        <button onclick="checkAuthState()">Refresh State</button>
+        <button onclick="clearAuth()">Clear Auth</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Login</h2>
+        <input type="email" id="testEmail" placeholder="Email" value="test@example.com">
+        <input type="password" id="testPassword" placeholder="Password" value="test123">
+        <button onclick="testLogin()">Test Login</button>
+        <div id="loginResult" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Token Validation</h2>
+        <button onclick="testTokenValidation()">Validate Token</button>
+        <div id="validationResult" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Logs</h2>
+        <div id="consoleLogs" style="background: #f8f9fa; padding: 10px; height: 200px; overflow-y: scroll; font-family: monospace; font-size: 12px;"></div>
+        <button onclick="clearLogs()">Clear Logs</button>
+    </div>
+
+    <script>
+        // Capture console logs
+        const originalLog = console.log;
+        const originalError = console.error;
+        const logsDiv = document.getElementById('consoleLogs');
+
+        function addLog(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.style.color = type === 'error' ? 'red' : 'black';
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            logsDiv.appendChild(logEntry);
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog(args.join(' '));
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog(args.join(' '), 'error');
+        };
+
+        function checkAuthState() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            const authDiv = document.getElementById('authState');
+            
+            let status = '';
+            status += `Token: ${token ? 'Present' : 'Missing'}\n`;
+            status += `User: ${user ? 'Present' : 'Missing'}\n`;
+            status += `Auth Object: ${window.auth ? 'Available' : 'Missing'}\n`;
+            
+            if (window.auth) {
+                status += `Is Logged In: ${window.auth.isLoggedIn()}\n`;
+                status += `Current User: ${JSON.stringify(window.auth.getCurrentUser(), null, 2)}`;
+            }
+            
+            authDiv.textContent = status;
+            authDiv.className = 'status info';
+        }
+
+        function clearAuth() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            if (window.auth) {
+                window.auth.logout();
+            }
+            checkAuthState();
+            addLog('Auth cleared');
+        }
+
+        async function testLogin() {
+            const email = document.getElementById('testEmail').value;
+            const password = document.getElementById('testPassword').value;
+            const resultDiv = document.getElementById('loginResult');
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.textContent = 'Login successful!';
+                    resultDiv.className = 'status success';
+                    checkAuthState();
+                } else {
+                    resultDiv.textContent = `Login failed: ${data.message}`;
+                    resultDiv.className = 'status error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'status error';
+            }
+        }
+
+        async function testTokenValidation() {
+            const token = localStorage.getItem('token');
+            const resultDiv = document.getElementById('validationResult');
+            
+            if (!token) {
+                resultDiv.textContent = 'No token to validate';
+                resultDiv.className = 'status error';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3001/api/auth/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.textContent = 'Token is valid!';
+                    resultDiv.className = 'status success';
+                } else {
+                    resultDiv.textContent = `Token validation failed: ${data.message}`;
+                    resultDiv.className = 'status error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'status error';
+            }
+        }
+
+        function clearLogs() {
+            logsDiv.innerHTML = '';
+        }
+
+        // Check auth state on load
+        window.addEventListener('load', () => {
+            setTimeout(checkAuthState, 1000); // Wait for auth to initialize
+        });
+    </script>
+</body>
+</html>

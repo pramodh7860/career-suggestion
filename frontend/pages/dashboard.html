@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Compass - Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-theme">
+  <div class="background-svg">
+      <!-- Abstract SVG background pattern -->
+      <svg viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="200" r="80" fill="var(--accent-color-light)" opacity="0.3"/>
+          <circle cx="1300" cy="600" r="120" fill="var(--accent-color-dark)" opacity="0.2"/>
+          <rect x="200" y="500" width="150" height="150" rx="20" fill="var(--primary-color)" opacity="0.1"/>
+          <path d="M0 0L1440 0L1440 400C1200 500 800 550 400 450C100 350 0 200 0 0Z" fill="var(--secondary-color)" opacity="0.05"/>
+      </svg>
+  </div>
+
+  <header class="header">
+      <nav class="navbar">
+          <div class="logo">
+              <img src="../assets/ChatGPT Image Jul 31, 2025, 10_34_15 PM.png" alt="Career Compass Logo" class="logo-image">
+              <span>Career Compass</span>
+          </div>
+          <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="explorer.html">Explore Careers</a></li>
+              <li><a href="dashboard.html" class="active">Dashboard</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="login.html" class="btn btn-primary">Login</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <main class="main-content dashboard-page">
+      <!-- Welcome Section -->
+      <section class="welcome-section fade-in-up">
+          <div class="welcome-content">
+              <h1>Welcome back, <span id="userName">User</span>!</h1>
+              <p>Track your progress and discover new opportunities</p>
+          </div>
+          <div class="quick-actions">
+              <button class="btn btn-primary" id="takeQuizBtn">Take Quiz</button>
+              <button class="btn btn-secondary" id="exploreCareersBtn">Explore Careers</button>
+          </div>
+      </section>
+
+      <!-- Stats Overview -->
+      <section class="stats-section fade-in-up delay-1">
+          <div class="stats-grid">
+              <div class="stat-card">
+                  <div class="stat-icon">📊</div>
+                  <div class="stat-content">
+                      <h3 id="quizCount">0</h3>
+                      <p>Quizzes Taken</p>
+                  </div>
+              </div>
+              <div class="stat-card">
+                  <div class="stat-icon">⭐</div>
+                  <div class="stat-content">
+                      <h3 id="savedCareers">0</h3>
+                      <p>Saved Careers</p>
+                  </div>
+              </div>
+              <div class="stat-card">
+                  <div class="stat-icon">🎯</div>
+                  <div class="stat-content">
+                      <h3 id="avgScore">0%</h3>
+                      <p>Average Score</p>
+                  </div>
+              </div>
+              <div class="stat-card">
+                  <div class="stat-icon">📈</div>
+                  <div class="stat-content">
+                      <h3 id="progressDays">0</h3>
+                      <p>Days Active</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <!-- Main Content Grid -->
+      <div class="dashboard-grid">
+          <!-- Recent Quiz Results -->
+          <section class="dashboard-card recent-results fade-in-up delay-2">
+              <div class="card-header">
+                  <h2>Recent Quiz Results</h2>
+                  <button class="btn btn-text" id="viewAllResultsBtn">View All</button>
+              </div>
+              <div class="results-list" id="recentResults">
+                  <div class="loading">Loading recent results...</div>
+              </div>
+          </section>
+
+          <!-- Top Career Recommendations -->
+          <section class="dashboard-card recommendations fade-in-up delay-3">
+              <div class="card-header">
+                  <h2>Top Recommendations</h2>
+                  <button class="btn btn-text" id="refreshRecommendationsBtn">Refresh</button>
+              </div>
+              <div class="recommendations-list" id="topRecommendations">
+                  <div class="loading">Loading recommendations...</div>
+              </div>
+          </section>
+
+          <!-- Saved Careers -->
+          <section class="dashboard-card saved-careers fade-in-up delay-4">
+              <div class="card-header">
+                  <h2>Saved Careers</h2>
+                  <button class="btn btn-text" id="exploreMoreBtn">Explore More</button>
+              </div>
+              <div class="saved-careers-list" id="savedCareersList">
+                  <div class="loading">Loading saved careers...</div>
+              </div>
+          </section>
+
+          <!-- Progress Chart -->
+          <section class="dashboard-card progress-chart fade-in-up delay-5">
+              <div class="card-header">
+                  <h2>Progress Over Time</h2>
+                  <div class="chart-controls">
+                      <button class="btn btn-text active" data-period="week">Week</button>
+                      <button class="btn btn-text" data-period="month">Month</button>
+                      <button class="btn btn-text" data-period="year">Year</button>
+                  </div>
+              </div>
+              <div class="chart-container">
+                  <canvas id="progressChart"></canvas>
+              </div>
+          </section>
+
+          <!-- Learning Path -->
+          <section class="dashboard-card learning-path fade-in-up delay-6">
+              <div class="card-header">
+                  <h2>Your Learning Path</h2>
+                  <button class="btn btn-text" id="updateLearningPathBtn">Update</button>
+              </div>
+              <div class="learning-steps" id="learningSteps">
+                  <div class="step completed">
+                      <div class="step-icon">✅</div>
+                      <div class="step-content">
+                          <h4>Complete Career Quiz</h4>
+                          <p>Understand your strengths and interests</p>
+                      </div>
+                  </div>
+                  <div class="step active">
+                      <div class="step-icon">📚</div>
+                      <div class="step-content">
+                          <h4>Research Top Careers</h4>
+                          <p>Explore recommended career paths</p>
+                      </div>
+                  </div>
+                  <div class="step">
+                      <div class="step-icon">🎓</div>
+                      <div class="step-content">
+                          <h4>Develop Skills</h4>
+                          <p>Start learning required skills</p>
+                      </div>
+                  </div>
+                  <div class="step">
+                      <div class="step-icon">💼</div>
+                      <div class="step-content">
+                          <h4>Apply & Network</h4>
+                          <p>Begin your career journey</p>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <!-- Quick Actions -->
+          <section class="dashboard-card quick-actions-card fade-in-up delay-7">
+              <div class="card-header">
+                  <h2>Quick Actions</h2>
+              </div>
+              <div class="quick-actions-grid">
+                  <button class="action-btn" id="takeNewQuizBtn">
+                      <div class="action-icon">🎯</div>
+                      <span>Take New Quiz</span>
+                  </button>
+                  <button class="action-btn" id="exploreCareersActionBtn">
+                      <div class="action-icon">🔍</div>
+                      <span>Explore Careers</span>
+                  </button>
+                  <button class="action-btn" id="exportDataBtn">
+                      <div class="action-icon">📤</div>
+                      <span>Export Data</span>
+                  </button>
+                  <button class="action-btn" id="shareProgressBtn">
+                      <div class="action-icon">📢</div>
+                      <span>Share Progress</span>
+                  </button>
+              </div>
+          </section>
+      </div>
+  </main>
+
+  <!-- Notification Container -->
+  <div id="notificationContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../scripts/auth.js"></script>
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/simple-debug.js"></script> <!-- Simple debug script to monitor auth -->
+  <script src="../scripts/dashboard.js"></script>
+</body>
+</html>

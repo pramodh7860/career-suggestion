@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        .log { background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 3px; font-family: monospace; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Network Connectivity Test</h1>
+    
+    <div class="test-section">
+        <h2>Server Health Check</h2>
+        <button onclick="testHealth()">Test Server Health</button>
+        <div id="healthResult" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>API Endpoint Test</h2>
+        <button onclick="testAPI()">Test Login API</button>
+        <div id="apiResult" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Network Diagnostics</h2>
+        <button onclick="runDiagnostics()">Run Full Diagnostics</button>
+        <div id="diagnosticsResult" class="status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Logs</h2>
+        <div id="testLogs"></div>
+        <button onclick="clearLogs()">Clear Logs</button>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logsDiv = document.getElementById('testLogs');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log ${type}`;
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logsDiv.appendChild(logEntry);
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+        }
+
+        async function testHealth() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.textContent = 'Testing...';
+            resultDiv.className = 'status info';
+            
+            try {
+                log('Testing server health endpoint...');
+                const response = await fetch('http://localhost:3001/health');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.textContent = `✅ Server is healthy: ${data.message}`;
+                    resultDiv.className = 'status success';
+                    log(`Health check passed: ${data.status}`, 'success');
+                } else {
+                    resultDiv.textContent = `❌ Server health check failed: ${response.status}`;
+                    resultDiv.className = 'status error';
+                    log(`Health check failed: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                resultDiv.textContent = `❌ Network error: ${error.message}`;
+                resultDiv.className = 'status error';
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testAPI() {
+            const resultDiv = document.getElementById('apiResult');
+            resultDiv.textContent = 'Testing...';
+            resultDiv.className = 'status info';
+            
+            try {
+                log('Testing login API endpoint...');
+                const response = await fetch('http://localhost:3001/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'test123'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.textContent = '✅ Login API is working correctly';
+                    resultDiv.className = 'status success';
+                    log('Login API test passed', 'success');
+                } else {
+                    resultDiv.textContent = `❌ Login API failed: ${data.message}`;
+                    resultDiv.className = 'status error';
+                    log(`Login API failed: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                resultDiv.textContent = `❌ Network error: ${error.message}`;
+                resultDiv.className = 'status error';
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function runDiagnostics() {
+            const resultDiv = document.getElementById('diagnosticsResult');
+            resultDiv.textContent = 'Running diagnostics...';
+            resultDiv.className = 'status info';
+            
+            log('Starting network diagnostics...');
+            
+            // Test 1: Basic connectivity
+            try {
+                log('Testing basic connectivity...');
+                const response = await fetch('http://localhost:3001/health');
+                if (response.ok) {
+                    log('✅ Basic connectivity: OK', 'success');
+                } else {
+                    log(`❌ Basic connectivity: Failed (${response.status})`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Basic connectivity: ${error.message}`, 'error');
+            }
+
+            // Test 2: CORS headers
+            try {
+                log('Testing CORS headers...');
+                const response = await fetch('http://localhost:3001/health');
+                const corsHeader = response.headers.get('Access-Control-Allow-Origin');
+                if (corsHeader) {
+                    log(`✅ CORS headers: Present (${corsHeader})`, 'success');
+                } else {
+                    log('⚠️ CORS headers: Not present', 'info');
+                }
+            } catch (error) {
+                log(`❌ CORS test failed: ${error.message}`, 'error');
+            }
+
+            // Test 3: API endpoint
+            try {
+                log('Testing API endpoint...');
+                const response = await fetch('http://localhost:3001/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'test123'
+                    })
+                });
+
+                if (response.ok) {
+                    log('✅ API endpoint: Working', 'success');
+                } else {
+                    const data = await response.json();
+                    log(`❌ API endpoint: Failed (${data.message})`, 'error');
+                }
+            } catch (error) {
+                log(`❌ API test failed: ${error.message}`, 'error');
+            }
+
+            // Test 4: Browser compatibility
+            log(`✅ Browser: ${navigator.userAgent.split(' ')[0]}`, 'success');
+            log(`✅ Fetch API: ${typeof fetch !== 'undefined' ? 'Available' : 'Not available'}`, 'success');
+
+            resultDiv.textContent = '✅ Diagnostics completed. Check logs for details.';
+            resultDiv.className = 'status success';
+        }
+
+        function clearLogs() {
+            document.getElementById('testLogs').innerHTML = '';
+        }
+
+        // Auto-run health check on page load
+        window.addEventListener('load', () => {
+            setTimeout(testHealth, 1000);
+        });
+    </script>
+</body>
+</html>
